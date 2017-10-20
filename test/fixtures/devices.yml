@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  key_handle: MyString
+  public_key: MyString
+  certificate: MyString
+  counter: 1
+  user: one
+
+two:
+  key_handle: MyString
+  public_key: MyString
+  certificate: MyString
+  counter: 1
+  user: two
