@@ -33,6 +33,8 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'u2f', '~> 1.0'
+
 group :development, :test do
   gem 'pry-rails'
   # Adds support for Capybara system testing and selenium driver
