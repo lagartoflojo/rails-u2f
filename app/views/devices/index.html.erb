@@ -1,0 +1,26 @@
+<h1>Your Security Keys</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Creation Date</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @devices.each do |device| %>
+      <tr>
+        <td><%= device.public_key %></td>
+        <td><%= device.created_at %></td>
+        <td><%= link_to 'Show', device %></td>
+        <td><%= link_to 'Destroy', device, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Device', new_device_path %>
