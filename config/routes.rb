@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :devices, only: [:index, :new, :create, :destroy]
+  resource :device_authentication, controller: 'device_authentication', only: [:new, :create]
 
   root to: 'sessions#new'
 end

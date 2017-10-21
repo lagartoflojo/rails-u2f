@@ -3,7 +3,8 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Id</th>
+      <th>Counter</th>
       <th>Creation Date</th>
       <th colspan="2"></th>
     </tr>
@@ -12,7 +13,8 @@
   <tbody>
     <% @devices.each do |device| %>
       <tr>
-        <td><%= device.public_key %></td>
+        <td><%= device.id %></td>
+        <td><%= device.counter %></td>
         <td><%= device.created_at %></td>
         <td><%= link_to 'Show', device %></td>
         <td><%= link_to 'Destroy', device, method: :delete, data: { confirm: 'Are you sure?' } %></td>

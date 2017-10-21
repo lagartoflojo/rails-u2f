@@ -1,0 +1,50 @@
+<h1>Authenticate with your security key</h1>
+
+<p class="lead">
+  Please insert the key and press the button within 15 seconds
+</p>
+
+<p id="waiting">
+  Waiting...
+</p>
+
+<p id="error" style="display: none"></p>
+
+<%= form_tag :device_authentication, url: device_authentication_path, id: 'device-auth' do |f| %>
+  <%= hidden_field_tag :response %>
+<% end %>
+
+<script>
+  const signRequests = <%= @sign_requests.to_json.html_safe %>;
+  const challenge = <%= @challenge.to_json.html_safe %>;
+  const appId = <%= @app_id.to_json.html_safe %>;
+  const $waiting = document.getElementById('waiting');
+  const $error = document.getElementById('error');
+  const errorMap = {
+    1: 'Unknown error, try again',
+    2: "Bad request error, try again" ,
+    3: "This key isn't supported, please try another one",
+    4: 'The device is not registered, please register first',
+    5: 'Authentication timed out. Please reload to try again.'
+  };
+  const setError = function(code) {
+    $waiting.style.display = 'none';
+    $error.style.display = 'block';
+    $error.innerHTML = errorMap[code];
+  };
+
+  u2f.sign(appId, challenge, signRequests, function(signResponse) {
+    var form, reg;
+
+    if (signResponse.errorCode) {
+      return setError(signResponse.errorCode);
+    }
+
+    form = document.getElementById('device-auth');
+    response = document.querySelector('[name=response]');
+
+    response.value = JSON.stringify(signResponse);
+
+    form.submit();
+  }, 15);
+</script>
