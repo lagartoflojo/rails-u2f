@@ -1,6 +1,5 @@
 class DeviceAuthenticationController < ApplicationController
-  before_action :require_user
-  # before_action :require_key
+  before_action :require_user_with_device
 
   def new
     key_handles = current_user.devices.map(&:key_handle)
@@ -26,7 +25,16 @@ class DeviceAuthenticationController < ApplicationController
       redirect_to new_device_authentication_path, notice: "Unable to authenticate: #{e.class.name}. Try again."
     end
 
+    authenticate_with_device
     device.update(counter: response.counter)
     redirect_to devices_path, notice: "Authenticated!"
+  end
+
+  private
+
+  def require_user_with_device
+    if logged_in? && !current_user.devices.any?
+      redirect_to devices_path, notice: 'You have no registered devices to log in with. Add one!'
+    end
   end
 end

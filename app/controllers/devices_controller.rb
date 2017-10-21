@@ -31,7 +31,7 @@ class DevicesController < ApplicationController
       redirect_to new_device_path, notice: "Unable to register: #{e.class.name}. Try again."
     end
 
-    redirect_to devices_path, notice: 'Device registered.'
+    redirect_to devices_path, notice: 'Device registered! Now try authenticating with it.'
   end
 
   def destroy

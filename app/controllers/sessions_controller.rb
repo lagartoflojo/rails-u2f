@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       flash[:notice] = "Logged in!"
       log_in(user)
-      redirect_to users_url
+      redirect_to user_url(current_user)
     else
       flash.now[:notice] = "Bad auth params"
       render :new
