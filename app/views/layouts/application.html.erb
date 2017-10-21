@@ -9,6 +9,13 @@
   </head>
 
   <body>
+    <p id="notice"><%= notice %></p>
     <%= yield %>
+    <% if logged_in? %>
+      <div>
+        Logged in as <%= current_user.email %>.
+        <%= link_to 'Log out', logout_path, method: :delete %>.
+      </div>
+    <% end %>
   </body>
 </html>
